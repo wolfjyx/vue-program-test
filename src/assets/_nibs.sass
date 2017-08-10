@@ -1,0 +1,331 @@
+// Variables
+$fontStack: ('San Francisco', 'Helvetica Neue', Helvetica, 'Source Han Sans', STHeiTi, sans-serif)
+$fblack : (#333 #666 #999 #bfbfbf #000)
+$fgray : (#dcdcdc #efefef #f5f5f5 #e8e8e8 #f0f0f0 #eeeeee)  //
+$fwhite : (#fff)
+$fred : (#e02126 #c51d21 #fc423e #fc5f58 #fdecec)
+$fyellow : (#ffb400)
+$fgreen : (#26ab28 #3bd6ae #1fb922)
+$fblue : (#0faeff #00a1e5 #6a92f7)
+
+// font size
+$fz: (10px 11px 12px 14px 16px 18px 20px 22px 24px 26px 28px 34px 38px 45px 60px)
+$ifz: (13px 15px 16px 18px 20px 22px 25px 26px 28px 32px 36px 40px 44px 50px)
+
+// width
+// $h12: 1000px
+// $mgw: 195px 805px
+
+// level
+$zindex: (10 12 16 18 20 30 40 50 60 70 80 90 100 500 800 900 1000 1001 1040 1041 2000)
+
+// media range
+$range: ('minRange': 320px, 'sRange': 374px, 'smRange': 414px, 'slRange': 639px, 'sxlRange': 719px, 'mRange': 749px, 'lRange': 799px, 'maxRange': 1920px)
+$bro: ('safarihack': 0)
+// @mixin respond-to($upper, $lower, $boolean)
+//   @if map-has-key($breakpoints, $upper)
+//       @if $boolean
+//         @media screen and (min-width: #{map-get($breakpoints, $upper)}) and (max-width: #{map-get($breakpoints, $lower)})
+//           @content
+//       @else
+//         @media screen and (max-width: #{map-get($breakpoints, $lower)})
+//           @content
+//   @else
+//     @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. Please make sure it is defined in `$breakpoints` map."
+
+=respond-to($upper)
+  @if map-has-key($range, $upper)
+    @if $upper == 'minRange'
+      @media screen and (max-width: #{map-get($range, $upper)})
+        @content
+    @else if $upper == 'sRange'
+      @media screen and (min-width: #{(map-get($range, minRange) + 1px)}) and (max-width: #{map-get($range, $upper)})
+        @content
+    @else if $upper == 'smRange'
+      @media screen and (min-width: #{(map-get($range, sRange) + 1px)}) and (max-width: #{map-get($range, $upper)})
+        @content
+    @else if $upper == 'slRange'
+      @media screen and (min-width: #{(map-get($range, smRange) + 1px)}) and (max-width: #{map-get($range, $upper)})
+        @content
+    @else if $upper == 'sxlRange'
+      @media screen and (min-width: #{(map-get($range, slRange) + 1px)}) and (max-width: #{map-get($range, $upper)})
+        @content
+    @else if $upper == 'mRange'
+      @media screen and (min-width: #{(map-get($range, sxlRange) + 1px)}) and (max-width: #{map-get($range, $upper)})
+        @content
+    @else if $upper == 'lRange'
+      @media screen and (min-width: #{(map-get($range, mRange) + 1px)}) and (max-width: #{map-get($range, $upper)})
+        @content
+    @else if $upper == 'maxRange'
+      @media screen and (min-width: #{(map-get($range, lRange) + 1px)})
+        @content
+  @else if map-has-key($bro, $upper)
+    // safari hack
+    @media screen and (-webkit-min-device-pixel-ratio: #{map-get($bro, $upper)})
+      @content
+  @else
+    @warn "Unfortunately, no value could be retrieved from `#{$range}`. Please make sure it is defined in `$range` map."
+
+
+// function 640px basic html font-size: 20
+// @function rem($px, $dpr)
+//   @return $px / $dpr * 1rem
+@function rem($px)
+  @return $px / 20 * 1rem
+
+// mixins
+@mixin borderbox
+  box-sizing: border-box
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+
+@mixin inits
+  margin: 0
+  padding: 0
+  text-align: left
+  vertical-align: baseline
+  font-size: 12px
+  line-height: 100%
+
+@mixin middle
+  margin: 0 auto
+
+@mixin hid
+  overflow: hidden
+
+// webkit内核专属 - 局部块滚动优化
+@mixin scroll($axle)
+  overflow: hidden
+  overflow-#{$axle}: auto
+  -webkit-overflow-scrolling: touch
+
+@mixin txthid
+  white-space: nowrap
+  text-overflow: ellipsis
+
+@mixin lines
+  content: ""
+  width: 100%
+  display: block
+  border-bottom: 1px solid nth($fgray, 4)
+  -webkit-transform: scaleY(.5)
+  -webkit-transform-origin: 0 0
+
+@mixin bdline($rotation, $color, $cnum)
+  content: ""
+  width: 100%
+  display: block
+  border-#{$rotation}: 1px solid nth($color, $cnum)
+  // border-width: $rotation
+  // border-style: solid
+  // border-color: nth($fgray, 4)
+  -webkit-transform: scaleY(.5)
+  -webkit-transform-origin: 0 0
+
+@mixin underlines
+  text-decoration: underline
+
+@mixin noLine
+  text-decoration: none
+
+@mixin valign($site)
+  vertical-align: $site
+
+@mixin wordbreak
+  word-break: break-all
+  word-wrap: break-word
+
+@mixin border-radius($radius: 5px)
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  -ms-border-radius: $radius
+  border-radius: $radius
+
+@mixin simple-radius($vert, $horz, $radius: 5px)
+  -webkit-border-#{$vert}-#{$horz}-radius: $radius
+  -moz-border-radius-#{$vert}#{$horz}: $radius
+  border-#{$vert}-#{$horz}-radius: $radius
+
+@mixin opacity($oy)
+  -moz-opacity: $oy
+  -khtml-opacity: $oy
+  opacity: $oy
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$oy * 100}) \9
+
+@mixin shadow($shadow)
+  -webkit-box-shadow: $shadow
+  -moz-box-shadow: $shadow
+  box-shadow: $shadow
+
+@mixin textshadow($txtshadow)
+  -webkit-text-shadow: $txtshadow
+  -moz-text-shadow: $txtshadow
+  text-shadow: $txtshadow
+
+// 各类渐变
+@mixin bgShade($upcolor, $dncolor)
+  background-color: $upcolor
+  background-image: -moz-linear-gradient(top, #{$upcolor}, #{$dncolor})
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from( #{$upcolor}), to(#{$dncolor}))
+  background-image: -webkit-linear-gradient(top,  #{$upcolor}, #{$dncolor})
+  background-image: -o-linear-gradient(top,  #{$upcolor}, #{$dncolor})
+  background-image: linear-gradient(to bottom,  #{$upcolor}, #{$dncolor})
+  background-repeat: repeat-x
+
+@mixin bgShadeLeft($leftcolor, $rightcolor)
+  background-color: $leftcolor
+  background-image: -moz-linear-gradient(left, #{$leftcolor}, #{$rightcolor})
+  background-image: -webkit-gradient(linear, 0 0, 100% 0, from( #{$leftcolor}), to(#{$rightcolor}))
+  background-image: -webkit-linear-gradient(left,  #{$leftcolor}, #{$rightcolor})
+  background-image: -o-linear-gradient(left,  #{$leftcolor}, #{$rightcolor})
+  background-image: linear-gradient(to right,  #{$leftcolor}, #{$rightcolor})
+  background-repeat: repeat-y
+// 各类渐变结束
+
+@mixin bgSize($rule)
+  -webkit-background-size: $rule
+  -moz-background-size: $rule
+  -ms-background-size: $rule
+  -o-background-size: $rule
+  background-size: $rule
+@mixin placeholder($label)
+  // WebKit browsers
+  #{$label}::-webkit-input-placeholder
+    @content
+  // Mozilla Firefox 4 to 18
+  #{$label}:-moz-placeholder
+    @content
+  // Mozilla Firefox 19+
+  #{$label}::-moz-placeholder
+    @content
+  // Internet Explorer 10+
+  #{$label}:-ms-input-placeholder
+    @content
+@mixin transition($property)
+  -moz-transition: $property
+  -webkit-transition: $property
+  -o-transition: $property
+  transition: $property
+@mixin trans($value)
+  -webkit-transform: $value
+  -moz-transform: $value
+  -ms-transform: $value
+  -o-transform: $value
+  transform: $value
+@mixin animation($value)
+  -webkit-animation: $value
+  -moz-animation: $value
+  -ms-animation: $value
+  -o-animation: $value
+  animation: $value
+@mixin tranorigin($value)
+  -webkit-transform-origin: $value
+  -moz-transform-origin: $value
+  -ms-transform-origin: $value
+  -o-transform-origin: $value
+  transform-origin: $value
+@mixin animation-delay($value)
+  -o-animation-delay: $value
+  -ms-animation-delay: $value
+  -webkit-animation-delay: $value
+  -moz-animation-delay: $value
+  animation-delay: $value
+@mixin transduration($value)
+  -o-transition-duration: $value
+  -ms-transition-duration: $value
+  -webkit-transition-duration: $value
+  -moz-transition-duration: $value
+  transition-duration: $value
+// @mixin keyframes($value)
+//   @-webkit-keyframes #{$value}
+//     @content
+//   @-moz-keyframes #{$value}
+//     @content
+//   @-ms-keyframes #{$value}
+//     @content
+//   @-o-keyframes #{$value}
+//     @content
+//   @keyframes #{$value}
+//     @content
+
+// browser's private prefix
+// required for keyframe mixin
+$pre-webkit: true !default
+$pre-mozilla: true !default
+$pre-ms: true !default
+$pre-opera: true !default
+$pre-spec: true !default
+
+// disable all browser's private prefix
+@mixin pre-all-disabled()
+  $pre-webkit: false !global
+  $pre-mozilla: false !global
+  $pre-ms: false !global
+  $pre-opera: false !global
+  $pre-spec: false !global
+
+//Example Keyframes Usage
+//参考 https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/css3/_keyframes.scss
+@mixin keyframes($name)
+  $_pre-webkit: $pre-webkit
+  $_pre-mozilla: $pre-mozilla
+  $_pre-ms: $pre-ms
+  $_pre-opera: $pre-opera
+  $_pre-spec: $pre-spec
+
+  @if $_pre-webkit
+    @include pre-all-disabled()
+    $pre-webkit: true !global
+    @-webkit-keyframes #{$name}
+      @content
+  @if $_pre-mozilla
+    @include pre-all-disabled()
+    $pre-mozilla: true !global
+    @-moz-keyframes #{$name}
+      @content
+  @if $_pre-ms
+    @include pre-all-disabled()
+    $pre-ms: true !global
+    @-ms-keyframes #{$name}
+      @content
+  @if $_pre-opera
+    @include pre-all-disabled()
+    $pre-opera: true !global
+    @-o-keyframes #{$name}
+      @content
+  @if $_pre-spec
+    @include pre-all-disabled()
+    $pre-spec: true !global
+    @keyframes #{$name}
+      @content
+  $pre-webkit: $_pre-webkit !global
+  $pre-mozilla: $_pre-mozilla !global
+  $pre-ms: $_pre-ms !global
+  $pre-opera: $_pre-opera !global
+  $pre-spec: $_pre-spec !global
+
+// 参考 https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/addons/_prefixer.scss
+@mixin prefixer($property, $value, $prefixes)
+  @each $prefix in $prefixes
+    @if $prefix == webkit
+      @if $pre-webkit
+        -webkit-#{$property}: $value
+    @else if $prefix == moz
+      @if $pre-mozilla
+        -moz-#{$property}: $value
+    @else if $prefix == ms
+      @if $pre-ms
+        -ms-#{$property}: $value
+    @else if $prefix == o
+      @if $pre-opera
+        -o-#{$property}: $value
+    @else if $prefix == spec
+      @if $pre-spec
+        #{$property}: $value
+    @else
+      @warn "Unrecognized prefix: #{$prefix}"
+
+//Example Transform Usage
+//参考 https://github.com/thoughtbot/bourbon/blob/v4-stable/app/assets/stylesheets/css3/_transform.scss
+@mixin transform($value)
+  @include prefixer(transform, $value, webkit moz ms o spec)

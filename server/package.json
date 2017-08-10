@@ -1,0 +1,19 @@
+{
+  "name": "node-cahtroom",
+  "version": "1.0.0",
+  "description": "a node program",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "npm install mongoose@4.10.8 --save",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongoose": "^4.10.8",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.17.2"
+  }
+}

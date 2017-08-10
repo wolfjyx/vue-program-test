@@ -1,0 +1,10 @@
+export const CHANGE_TITLE = 'CHANGE_TITLE'
+export const USER_LIST_INIT = 'USER_LIST_INIT'
+export const CHAT_LIST_INIT = 'CHAT_LIST_INIT'
+export const SEND_MESSAGE = 'END_MESSAGE'
+export const ADD_USER = 'ADD_USER'
+export const REMOVE_USER = 'REMOVE_USER'
+export const CHANGE_BACK = 'CHANGE_BACK'
+export const ZONE_INIT = 'ZONE_INIT'
+export const ZONE_ADD = 'ZONE_ADD'
+
