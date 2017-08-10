@@ -1,7 +1,7 @@
 # vue-pragram-test
 
-> 基于vue搭建的自动聊天室和动态展示栏  
-> vue全家桶(vuex,vue-router,axois) + node + express + mongodb 
+> 基于vue搭建的自动聊天室和动态展示栏
+> vue全家桶(vuex,vue-router,axois) + node + express + mongodb
 
 ## 安装与启动mongodb
 
@@ -10,13 +10,13 @@
 		$ brew install mongodb
 
 * 启动MongoDb（安装成功后命令行有提示）
-   
+
 		$ mongod --config /usr/local/etc/mongod.conf
 
-* 连接到mongo  
+* 连接到mongo
 
 		$mongo
-##启动服务端			
+##启动服务端
 			npm run server
 ## 启动项目
 
@@ -39,5 +39,4 @@ npm run e2e
 # run all tests
 npm test
 ```
-
 
